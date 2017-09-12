@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>AngularJS • TodoMVC</title>
+	    <link rel="stylesheet" href="node_modules/todomvc-common/base.css">
+	    <link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+	</head>
+	<body ng-app="todo" ng-controller="todoCtrl">
+		<section id="todoapp">
+			<header id="header">
+				<h1>todos</h1>
+				<form id="todo-form">
+					<input id="new-todo" placeholder="What needs to be done?" autofocus ng-model='task' ng-keyup='addTask($event)'>
+				</form>
+			</header>
+			<section id="main">
+				<input type="checkbox" id="toggle-all" ng-model='status' ng-change='changeStatus()'>
+				<label for="toggle-all">Mark all as complete</label>
+				<ul id="todo-list">
+					<li ng-repeat="item in taskList | filter :{isCompleted:filterType}" ng-class="{'completed':item.isCompleted,'editing':item.isEditing}">
+						<div class="view">
+							<input class="toggle" type="checkbox" ng-model='item.isCompleted' ng-change='updateStatus()'>
+							<label ng-dblclick='modifyTaskName(item)'>{{item.name}}</label>
+							<button class="destroy" ng-click='destroyTask(item)'></button>
+						</div>
+						<form>
+							<input class="edit" ng-model='item.name' ng-blur='cancelEditing()' inp-focus>
+						</form>
+					</li>
+				</ul>
+			</section>
+			<footer id="footer">
+				<span id="todo-count">
+					<strong>{{unCompletedTaskNum()}}</strong>&nbsp;&nbsp;item left
+				</span>
+				<ul id="filters">
+					<li>
+						<a ng-click="filterData('All')"  ng-class="{'selected':select=='All'}" href="javascript:;">All</a>
+					</li>
+					<li>
+						<a ng-click="filterData('Active')" ng-class="{'selected':select=='Active'}" href="javascript:;">Active</a>
+					</li>
+					<li>
+						<a ng-click="filterData('Completed')" ng-class="{'selected':select=='Completed'}" href="javascript:;">Completed</a>
+					</li>
+				</ul>
+				<button id="clear-completed" ng-click='clearCompleted()'>Clear completed</button>
+			</footer>
+		</section>
+		<script src="node_modules/angular/angular.js"></script>
+		<script src='js/app.js'></script>
+	</body>
+</html>
+<script>
+	/*
+		1.引包angular.js
+		2.创建app.js并引入到页面中
+		3.在app.js中创建模块
+		4.告诉angular当前页面要用我创建的myApp模块去管理
+		5.创建控制器
+		6.告诉angular控制器要控制的区域
+		7.我要向页面中展示数据 所以我要依赖$scope
+
+		8.获取数据并展示到页面中
+		9.添加任务
+		10.删除任务(单个)
+		11.更改任务状态
+		12.增加筛选
+		13.计算未完成任务的数量
+		14.清空已完成任务
+		15.批量更改任务状态
+		16.修改任务名称
+
+	 */
+</script>
